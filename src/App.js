@@ -1,25 +1,67 @@
-import logo from './logo.svg';
 import './App.css';
+import {useState} from "react"
 
 function App() {
+  const [columns,setColumns] = useState(25)
+  const [rows,setRows] = useState(25)
+
+  const handleColumnChange=(event)=>{
+    setColumns(Number(event.target.value))
+  }
+  const handleRowChange=(event)=>{
+    setRows(Number(event.target.value))
+  }
+
+  const renderTable=()=>{
+    const tableRows=[]
+
+      for (let i=0;i<rows;i++){
+        let rowCells=[]
+        for (let j=0;j<columns;j++){
+          rowCells.push(<td key={j}>Cell</td>)
+        }
+        tableRows.push(<tr key={i}>{rowCells}</tr>)
+      }
+     return (
+      <div>
+        <tbody>
+          {tableRows}
+        </tbody>
+      </div>
+     )
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        <h1>Column-table</h1>
+      </div>
+      <div>
+        <h3>Change the numbers to build your table</h3>
+        <label>
+          Columns:
+        <input 
+        onChange={handleColumnChange} 
+        value={columns}
+        type="number" />
+        </label>
+
+        {" "}
+        <label>
+          Rows:
+        <input 
+        onChange={handleRowChange} 
+        value={rows} 
+        type="number" />
+          </label> 
+      </div>
+      <div>
+      {renderTable()}
+      </div>
+
     </div>
   );
+
 }
 
 export default App;
