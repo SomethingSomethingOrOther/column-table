@@ -4,6 +4,7 @@ import {useState} from "react"
 function App() {
   const [columns,setColumns] = useState(25)
   const [rows,setRows] = useState(25)
+  
 
   const handleColumnChange=(event)=>{
     setColumns(Number(event.target.value))
@@ -11,6 +12,7 @@ function App() {
   const handleRowChange=(event)=>{
     setRows(Number(event.target.value))
   }
+  
 
   const renderTable=()=>{
     const tableRows=[]
@@ -18,7 +20,7 @@ function App() {
       for (let i=0;i<rows;i++){
         let rowCells=[]
         for (let j=0;j<columns;j++){
-          rowCells.push(<td key={j}>Cell</td>)
+          rowCells.push(<td key={j}>{i+j}</td>)
         }
         tableRows.push(<tr key={i}>{rowCells}</tr>)
       }
